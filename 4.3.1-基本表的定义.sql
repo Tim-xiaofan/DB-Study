@@ -1,0 +1,35 @@
+###基本表的定义###
+#DROP SCHEMA School;
+#CREATE SCHEMA School ;
+USE School;
+#域定义:CREATE DOMAIN <域名> <数据类型>;
+#CREATE DOMAIN Sdept_TYPE CHAR(12);#mysql不支持
+
+#建立学生表 Student
+CREATE TABLE Student
+(Sno CHAR(6) NOT NULL UNIQUE,
+ Sname CHAR(8),
+ Sage INT, 
+ Ssex CHAR(2),
+ Sdept CHAR(12), 
+ CONSTRAINT C1 CHECK (Ssex IN('男','女')),
+ CONSTRAINT S_PK PRIMARY KEY(Sno));
+ 
+ #建立课程表和选课表
+ CREATE TABLE Course
+(Cno CHAR(6) NOT NULL, 
+Cname CHAR(20),
+Ccredit INT,
+CONSTRAINT C_PK PRIMARY KEY(Cno));
+
+CREATE TABLE SC
+(Sno CHAR(6) NOT NULL,
+Cno CHAR(6) NOT NULL, 
+Grade INT CHECK (Grade BETWEEN 0 AND 100),
+CONSTRAINT SC_PK PRIMARY KEY(Sno,Cno),
+CONSTRAINT SC_FK1 FOREIGN KEY (Sno) REFERENCES Student(Sno),
+CONSTRAINT SC_FK2 FOREIGN KEY (Cno) REFERENCES Course(Cno));
+
+show tables;
+
+#
