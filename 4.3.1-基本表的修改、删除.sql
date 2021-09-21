@@ -9,6 +9,8 @@ SELECT * FROM Student;
 #修改学生表Student中姓名列的长度为 20
 #ALTER TABLE Student ALTER Sname CHAR(20);#mysql不是此语句
 ALTER TABLE Student MODIFY COLUMN Sname CHAR(20);
+#修改学号长度
+ALTER TABLE Student MODIFY COLUMN Sno CHAR(9);
 
 #删除基本表：DROP TABLE <表名> [CASCADE | RECTRICT]
 DROP TABLE Student RESTRICT;#只有没有视图或参照约束表时才能删除，否则拒绝删除该表

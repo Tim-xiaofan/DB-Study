@@ -7,7 +7,7 @@ USE School;
 
 #建立学生表 Student
 CREATE TABLE Student
-(Sno CHAR(6) NOT NULL UNIQUE,
+(Sno CHAR(9) NOT NULL UNIQUE,
  Sname CHAR(8),
  Sage INT, 
  Ssex CHAR(2),
@@ -31,5 +31,4 @@ CONSTRAINT SC_FK1 FOREIGN KEY (Sno) REFERENCES Student(Sno),
 CONSTRAINT SC_FK2 FOREIGN KEY (Cno) REFERENCES Course(Cno));
 
 show tables;
-
 #
