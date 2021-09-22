@@ -39,6 +39,9 @@ insert into Course(Cno, Cname, Ccredit)values
 ("5", "数据结构", 4),
 ("6", "数据处理", 2),
 ("7", "PASCALL", 4);
+insert into Course(Cno, Cname, Ccredit)values
+("C1", "数据库", 4),
+("C3", "信息系统", 4);
 
 insert into Course(Cno, Cname, Cpno,Ccredit) values("8", "软件工程", "6", 2);
 
@@ -69,6 +72,13 @@ insert into SC(Sno, Cno, Grade)values
 ("201215121", "3", 88),
 ("201215122", "2", 90),
 ("201215122", "3", 80);
+
+insert into SC(Sno, Cno, Grade)values
+("201215121", "C1", 92),
+("201215121", "C2", 82),
+("201215121", "C3", 88),
+("201215122", "C2", 90),
+("201215122", "C1", 80);
 
 select * from Student;
 select * from Course;
