@@ -90,7 +90,7 @@ SELECT Student.*, SC.*
 	FROM Student LEFT JOIN SC ON Student.Sno = SC.Sno
     where Student.Sdept="CS";
 
-### 3.嵌套查询
+### 3.嵌套查询(IN 和 EXISTS)
 -- 【例 4-25】查询与学生李利在同一个系的学生信息。
 -- method 1(不相关子查询):
 SELECT Student.* FROM Student
@@ -137,11 +137,11 @@ SELECT Sno FROM SC WHERE Cno='1';
 --  即非计算机学院选了1号课程
 SELECT Sname FROM SC, Student
 	WHERE SC.Sno=Student.Sno AND SC.Cno='1' AND Student.Sdept!='CS';
--- 【例 4-32】查询选修了1号课的学生姓名与选修了2号课的学生姓名的交集。(MYSQL不支持INTERSECT)
+-- 【例 4-32】查询选修了C1号课的学生姓名与选修了C2号课的学生姓名的交集。(MYSQL不支持INTERSECT)
 -- 即同时选修了1号课和2号课的学生姓名
-SELECT * FROM Student, SC;
-SELECT Sname FROM Student, SC
+SELECT * FROM Student, SC WHERE Student.Sno = SC.Sno;
+SELECT DISTINCT Sname FROM Student, SC
 	WHERE SC.Sno=Student.Sno AND 
-    NOT EXISTS(SELECT *FROM Course WHERE (Cno='1' or Cno='2')  AND
+    NOT EXISTS(SELECT *FROM Course WHERE (Cno='C1' or Cno='C2')  AND
     NOT EXISTS(SELECT * FROM SC WHERE SC.Cno=Course.Cno 
     AND Student.Sno= SC.Sno));

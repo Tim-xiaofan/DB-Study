@@ -11,6 +11,8 @@ SELECT * FROM Student;
 ALTER TABLE Student MODIFY COLUMN Sname CHAR(20);
 #修改学号长度
 ALTER TABLE Student MODIFY COLUMN Sno CHAR(9);
+#修改学分为float
+ALTER TABLE Course MODIFY COLUMN Ccredit float(1);
 
 #删除基本表：DROP TABLE <表名> [CASCADE | RECTRICT]
 DROP TABLE Student RESTRICT;#只有没有视图或参照约束表时才能删除，否则拒绝删除该表

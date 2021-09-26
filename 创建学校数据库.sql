@@ -28,7 +28,10 @@ insert into `School`.`Student`
 ("201215121","李勇","男",20,"CS"),
 ("201215122","刘晨","女",19,"CS"),
 ("201215123","王敏","女",18,"MA"),
-("201215125","张立","男",19,"IS");
+("201215124","张敏","女",18,"CS"),
+("201215125","张立","男",19,"IS"),
+("201215126","董南","女",18,"CS"),
+("201215127","朱元璋","男",18,"电子系");
 
 #course数据
 insert into Course(Cno, Cname, Ccredit)values
@@ -41,7 +44,9 @@ insert into Course(Cno, Cname, Ccredit)values
 ("7", "PASCALL", 4);
 insert into Course(Cno, Cname, Ccredit)values
 ("C1", "数据库", 4),
-("C3", "信息系统", 4);
+("C3", "信息系统", 4),
+("C12", "离散数学I", 4),
+("C02", "历史", 5);
 
 insert into Course(Cno, Cname, Cpno,Ccredit) values("8", "软件工程", "6", 2);
 
@@ -71,7 +76,10 @@ insert into SC(Sno, Cno, Grade)values
 ("201215121", "2", 82),
 ("201215121", "3", 88),
 ("201215122", "2", 90),
-("201215122", "3", 80);
+("201215122", "3", 80),
+("201215124", "2", 91),
+("201215124", "3", 95),
+("201215127", "C02", 89);
 
 insert into SC(Sno, Cno, Grade)values
 ("201215121", "C1", 92),
@@ -83,5 +91,5 @@ insert into SC(Sno, Cno, Grade)values
 select * from Student;
 select * from Course;
 select * from SC;
-
+SET SQL_SAFE_UPDATES = 0;
 #drop database School;
