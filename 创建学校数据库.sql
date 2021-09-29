@@ -1,5 +1,5 @@
-CREATE SCHEMA School ;
-use School;
+CREATE DATABASE School;
+USE School;
 create table Student(
 Sno char(9) primary key,
 Sname varchar(20) unique,
