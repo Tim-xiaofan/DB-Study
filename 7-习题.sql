@@ -1,5 +1,6 @@
-------Ï°Ìâ7------
-------µÚ10Ìâ------
+------ä¹ é¢˜7------
+------ç¬¬10é¢˜------
+CREATE DATABASE Company
 USE Company;
 SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE';
 --salaried-worker (name, office, phone, salary)
@@ -9,14 +10,14 @@ CREATE TABLE salary_worker(
 	 phone char(11),
 	 salary int
 );
-INSERT INTO salary_worker(name) VALUES('ÀîËÄ');
+INSERT INTO salary_worker(name) VALUES('æŽå››');
 SELECT * FROM salary_worker;
 --hourly-worker (name, hourly-wage)
 CREATE TABLE hourly_worker(
 	name char(40) PRIMARY KEY,
 	hourly_wage int
 );
-INSERT INTO hourly_worker(name) VALUES('ÀîËÄ');
+INSERT INTO hourly_worker(name) VALUES('æŽå››');
 SELECT * FROM hourly_worker;
 --address (name, street, city)
 DROP TABLE address;
@@ -35,48 +36,48 @@ AS
 			salary_worker.name = hourly_worker.name 
 			WHERE salary_worker.name = INSERTED.name))
 		BEGIN
-			RAISERROR (15600,-1,-1, '²»ÔÊÐíaddressÖÐµÄnameÍ¬Ê±´æÔÚsalary_workerºÍhourly_workerÖÐ');
+			RAISERROR (15600,-1,-1, 'ä¸å…è®¸addressä¸­çš„nameåŒæ—¶å­˜åœ¨salary_workerå’Œhourly_workerä¸­');
 			ROLLBACK TRANSACTION
 		END
-INSERT INTO address(name) VALUES('ÀîËÄ');
-INSERT INTO address(name) VALUES('ÕÅÈý');
-UPDATE address set name='ÀîËÄ' WHERE name='ÕÅÈý';
+INSERT INTO address(name) VALUES('æŽå››');
+INSERT INTO address(name) VALUES('å¼ ä¸‰');
+UPDATE address set name='æŽå››' WHERE name='å¼ ä¸‰';
 
 
 
 
 /**
-------µÚ12Ìâ------
-books (±àºÅ£¬ÊéÃû£¬³ö°æÉç£¬¶¨¼Û) 
-readers (±àºÅ£¬ÐÕÃû£¬¶ÁÕßÀàÐÍ£¬ÒÑ½èÊýÁ¿)
-borrowinf (Í¼Êé±àºÅ£¬¶ÁÕß±àºÅ£¬½èÆÚ£¬»¹ÆÚ)
-readertype (ÀàÐÍ±àºÅ£¬ÀàÐÍÃû³Æ)
+------ç¬¬12é¢˜------
+books (ç¼–å·ï¼Œä¹¦åï¼Œå‡ºç‰ˆç¤¾ï¼Œå®šä»·) 
+readers (ç¼–å·ï¼Œå§“åï¼Œè¯»è€…ç±»åž‹ï¼Œå·²å€Ÿæ•°é‡)
+borrowinf (å›¾ä¹¦ç¼–å·ï¼Œè¯»è€…ç¼–å·ï¼Œå€ŸæœŸï¼Œè¿˜æœŸ)
+readertype (ç±»åž‹ç¼–å·ï¼Œç±»åž‹åç§°)
 */
 DROP DATABASE library;
 CREATE DATABASE library;
 USE library;
--- books (±àºÅ£¬ÊéÃû£¬³ö°æÉç£¬¶¨¼Û) 
+-- books (ç¼–å·ï¼Œä¹¦åï¼Œå‡ºç‰ˆç¤¾ï¼Œå®šä»·) 
 CREATE TABLE books(
 	book_no char(20) PRIMARY KEY,
 	book_name char(40) NOT NULL,
 	book_publisher char(40),
 	book_price float(2)
 );
-INSERT INTO books VALUES('1', '³¯»¨Ï¦Ê°', 'ÈËÃñ½ÌÓý³ö°æÉç', 27.80);
-INSERT INTO books VALUES('2', 'ÁÄÕ«Ö¾Òì', 'ÉÏº£ÉÌÎñ³ö°æÉç', 17.8);
-INSERT INTO books VALUES('3', 'ÃÎÏª±ÊÌ¸', 'º£ÄÏ³ö°æÉç', 25.5);
-INSERT INTO books VALUES('4', 'Ëã·¨µ¼ÂÛ', '»úÐµ¹¤Òµ³ö°æÉç', 78);
-INSERT INTO books VALUES('5', 'Êý¾Ý¿âÏµÍ³¸ÅÂÛ', '¸ßµÈ½ÌÓý³ö°æÉç', 39.60);
-INSERT INTO books VALUES('6', 'ÀëÉ¢ÊýÑ§', '¸ßµÈ½ÌÓý³ö°æÉç', 37.00);
+INSERT INTO books VALUES('1', 'æœèŠ±å¤•æ‹¾', 'äººæ°‘æ•™è‚²å‡ºç‰ˆç¤¾', 27.80);
+INSERT INTO books VALUES('2', 'èŠæ–‹å¿—å¼‚', 'ä¸Šæµ·å•†åŠ¡å‡ºç‰ˆç¤¾', 17.8);
+INSERT INTO books VALUES('3', 'æ¢¦æºªç¬”è°ˆ', 'æµ·å—å‡ºç‰ˆç¤¾', 25.5);
+INSERT INTO books VALUES('4', 'ç®—æ³•å¯¼è®º', 'æœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾', 78);
+INSERT INTO books VALUES('5', 'æ•°æ®åº“ç³»ç»Ÿæ¦‚è®º', 'é«˜ç­‰æ•™è‚²å‡ºç‰ˆç¤¾', 39.60);
+INSERT INTO books VALUES('6', 'ç¦»æ•£æ•°å­¦', 'é«˜ç­‰æ•™è‚²å‡ºç‰ˆç¤¾', 37.00);
 SELECT * FROM books;
---readertype (ÀàÐÍ±àºÅ£¬ÀàÐÍÃû³Æ)
+--readertype (ç±»åž‹ç¼–å·ï¼Œç±»åž‹åç§°)
 CREATE TABLE readertype(
 	type_no char(10) PRIMARY KEY,
 	type_name char(40) NOT NULL
 );
-INSERT INTO readertype VALUES('3', '¸öÈË');
+INSERT INTO readertype VALUES('3', 'ä¸ªäºº');
 SELECT * FROM readertype;
---readers (±àºÅ£¬ÐÕÃû£¬¶ÁÕßÀàÐÍ£¬ÒÑ½èÊýÁ¿)
+--readers (ç¼–å·ï¼Œå§“åï¼Œè¯»è€…ç±»åž‹ï¼Œå·²å€Ÿæ•°é‡)
 DROP TABLE readers;
 CREATE TABLE readers(
 	reader_no char(20) PRIMARY KEY,
@@ -85,25 +86,25 @@ CREATE TABLE readers(
 	reader_bcount smallint CHECK(reader_bcount >= 0),
 	CONSTRAINT readers_fk FOREIGN KEY(reader_typeno) REFERENCES readertype(type_no)
 );
-INSERT INTO readers VALUES('1', 'ÖÜÊ÷ÈË', '3', 1);
-INSERT INTO readers VALUES('2', 'ÆÑËÉÁä', '3', 6);
-INSERT INTO readers VALUES('3', 'Íõ°²Ê¯', '3', 5);
+INSERT INTO readers VALUES('1', 'å‘¨æ ‘äºº', '3', 1);
+INSERT INTO readers VALUES('2', 'è’²æ¾é¾„', '3', 6);
+INSERT INTO readers VALUES('3', 'çŽ‹å®‰çŸ³', '3', 5);
 SELECT * FROM readers;
---borrowinf (Í¼Êé±àºÅ£¬¶ÁÕß±àºÅ£¬½èÆÚ£¬»¹ÆÚ)
+--borrowinf (å›¾ä¹¦ç¼–å·ï¼Œè¯»è€…ç¼–å·ï¼Œå€ŸæœŸï¼Œè¿˜æœŸ)
 DROP TABLE borrowinf;
 CREATE TABLE borrowinf(
 	book_no char(20),
 	reader_no char(20),
 	borrow_date date NOT NULL,
 	return_date date,
-	CHECK(return_date >= borrow_date),
+	/**CHECK(return_date >= borrow_date),æ— æ³•æ‰§è¡Œ**/
 	PRIMARY KEY(book_no, reader_no),
 	FOREIGN KEY(book_no) REFERENCES books(book_no),
-	FOREIGN KEY(reader_no) REFERENCES readers(reader_no),
-	DEFAULT DATEADD(month, 1, borrow_date) FOR return_date 
+	FOREIGN KEY(reader_no) REFERENCES readers(reader_no)
+	/** DEFAULT DATEADD(month, 1, borrow_date) FOR return_date **/
 );
 SELECT * FROM borrowinf;
---£¨1£©Borrowinf ÖÐ¡°»¹ÆÚ¡±²»ÄÜÐ¡ÓÚ¡°½èÆÚ¡±£¬²¢ÇÒ¡°»¹ÆÚ¡±µÄÈ±Ê¡ÖµÎªµ±Ç°¡°½èÆÚ¡±ºó 1 ¸öÔÂ¡£
+--ï¼ˆ1ï¼‰Borrowinf ä¸­â€œè¿˜æœŸâ€ä¸èƒ½å°äºŽâ€œå€ŸæœŸâ€ï¼Œå¹¶ä¸”â€œè¿˜æœŸâ€çš„ç¼ºçœå€¼ä¸ºå½“å‰â€œå€ŸæœŸâ€åŽ 1 ä¸ªæœˆã€‚
 /**
 RAISERROR (N'This is message %s %d.', -- Message text.  
            10(16), -- Severity,  
@@ -143,21 +144,21 @@ DELETE borrowinf WHERE book_no='1';
 INSERT INTO borrowinf(book_no, reader_no, borrow_date) VALUES('1','2', GETDATE());
 SELECT * FROM borrowinf;
 DELETE borrowinf WHERE book_no='1';
-INSERT INTO borrowinf VALUES('1','2', GETDATE(), '2021-10-01');--¡°»¹ÆÚ¡±²»ÄÜÐ¡ÓÚ¡°½èÆÚ¡±
+INSERT INTO borrowinf VALUES('1','2', GETDATE(), '2021-10-01');--â€œè¿˜æœŸâ€ä¸èƒ½å°äºŽâ€œå€ŸæœŸâ€
 
 
 
 
 
 
-------µÚ13Ìâ------
---£¨1£©ÔÚ books ±íÖÐ½¨Á¢ UPDATE ´¥·¢Æ÷ tr1£¬Èô¸üÐÂÁË books ±íÖÐµÄÍ¼Êé±àºÅ£¬ÔòÏàÓ¦¸üÐÂ borrowinf ±íµÄÍ¼Êé±àºÅ¡£
+------ç¬¬13é¢˜------
+--ï¼ˆ1ï¼‰åœ¨ books è¡¨ä¸­å»ºç«‹ UPDATE è§¦å‘å™¨ tr1ï¼Œè‹¥æ›´æ–°äº† books è¡¨ä¸­çš„å›¾ä¹¦ç¼–å·ï¼Œåˆ™ç›¸åº”æ›´æ–° borrowinf è¡¨çš„å›¾ä¹¦ç¼–å·ã€‚
 DROP TRIGGER tr1;
 CREATE TRIGGER tr1 ON books
 FOR UPDATE
 AS
 	BEGIN
-		/*ÉùÃ÷ÁÙÊ±±äÁ¿*/
+		/*å£°æ˜Žä¸´æ—¶å˜é‡*/
 		DECLARE @_book_no char(20)--new
 		DECLARE @_book_no1 char(20)--old
 		SELECT @_book_no=book_no FROM INSERTED
@@ -167,23 +168,20 @@ AS
 
 SELECT * FROM borrowinf;
 SELECT * FROM books;
-UPDATE books SET book_no='2' WHERE book_no='1'; --²ÎÕÕÍêÕûÐÔ
---£¨2£©£¨2£© ÔÚ readers ±íÖÐ½¨Á¢ DELETE ´¥·¢Æ÷ tr2£¬µ±É¾³ý readers ±íÖÐµÄ¼ÇÂ¼Ê±£¬Èôborrowinf ±íÖÐÓÐÏàÓ¦µÄ½èÔÄ¼ÇÂ¼£¬Ôò²»ÔÊÐíÉ¾³ý¸Ã¼ÇÂ¼¡££¨¼ÓÁËÍâ¼üÎÞ·¨²âÊÔ£©
+UPDATE books SET book_no='2' WHERE book_no='1'; --å‚ç…§å®Œæ•´æ€§
+--ï¼ˆ2ï¼‰ï¼ˆ2ï¼‰ åœ¨ readers è¡¨ä¸­å»ºç«‹ DELETE è§¦å‘å™¨ tr2ï¼Œå½“åˆ é™¤ readers è¡¨ä¸­çš„è®°å½•æ—¶ï¼Œè‹¥borrowinf è¡¨ä¸­æœ‰ç›¸åº”çš„å€Ÿé˜…è®°å½•ï¼Œåˆ™ä¸å…è®¸åˆ é™¤è¯¥è®°å½•ã€‚ï¼ˆåŠ äº†å¤–é”®æ— æ³•æµ‹è¯•ï¼‰
 
---£¨3£©ÔÚ borrowinf ±íÖÐ½¨Á¢ INSERT ´¥·¢Æ÷ tr3£¬ÈôÄ³Î»¶ÁÕßµ±Ìì½èµÄÊéÒÑ³¬¹ý5±¾£¬Ôò²»ÔÊÐíÔÙ½èÁË¡£
+--ï¼ˆ3ï¼‰åœ¨ borrowinf è¡¨ä¸­å»ºç«‹ INSERT è§¦å‘å™¨ tr3ï¼Œè‹¥æŸä½è¯»è€…å½“å¤©å€Ÿçš„ä¹¦å·²è¶…è¿‡5æœ¬ï¼Œåˆ™ä¸å…è®¸å†å€Ÿäº†ã€‚
 DROP TRIGGER tr2;
 CREATE TRIGGER tr2
 ON borrowinf FOR INSERT
 AS
 	BEGIN
-		DECLARE @_count int = 50;
-		SELECT @_count=count(*) FROM borrowinf
-			WHERE borrow_date=CAST(GETDATE() AS DATE) 
-			AND reader_no = (SELECT reader_no FROM INSERTED);
-		PRINT @_count;
-		if(@_count > 5)
+		IF(SELECT count(*) FROM borrowinf
+			WHERE borrow_date=(SELECT borrow_date FROM INSERTED) 
+			AND reader_no = (SELECT reader_no FROM INSERTED)) > 5
 		BEGIN
-			RAISERROR (15600,-1,-1, '¶ÁÕßµ±Ìì½èÊé²»ÄÜ³¬¹ý5±¾');
+			RAISERROR (15600,-1,-1, 'è¯»è€…å½“å¤©å€Ÿä¹¦ä¸èƒ½è¶…è¿‡5æœ¬');
 			ROLLBACK TRANSACTION
 		END
 	END
@@ -202,16 +200,14 @@ INSERT INTO borrowinf VALUES('5', '1', GETDATE(), DATEADD(month, 1, GETDATE()));
 INSERT INTO borrowinf VALUES('6', '1', GETDATE(), DATEADD(month, 1, GETDATE()));
 
 
---£¨4£©ÔÚ borrowinf ±íÖÐ½¨Á¢ INSERT ´¥·¢Æ÷ tr4£¬ÈôÐÂÔö½èÊé¼ÇÂ¼Ôò×Ô¶¯ÔÚ±í readersµÄ¡°ÒÑ½èÊýÁ¿¡±ÉÏÔö¼Ó 1¡£
+--ï¼ˆ4ï¼‰åœ¨ borrowinf è¡¨ä¸­å»ºç«‹ INSERT è§¦å‘å™¨ tr4ï¼Œè‹¥æ–°å¢žå€Ÿä¹¦è®°å½•åˆ™è‡ªåŠ¨åœ¨è¡¨ readersçš„â€œå·²å€Ÿæ•°é‡â€ä¸Šå¢žåŠ  1ã€‚
 DROP TRIGGER tr3;
 CREATE TRIGGER tr3
 ON borrowinf FOR INSERT
 AS
 BEGIN
-	DECLARE @_reader_no char(20);
-	SELECT @_reader_no=reader_no FROM INSERTED;
 	UPDATE readers set reader_bcount = reader_bcount + 1 
-		WHERE reader_no = @_reader_no;
+		WHERE reader_no = (SELECT reader_no FROM INSERTED);
 END
 
 DELETE borrowinf WHERE reader_no = '1';
